@@ -1,0 +1,11 @@
+node_modules
+.env
+play
+public/upload/movies/*
+public/upload/users/*
+
+.DS_Store
+
+
+server/public/upload/movies/*
+

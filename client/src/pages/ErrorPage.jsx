@@ -1,4 +1,4 @@
-import "./ErrorPage.css";
+
 import "./Bootstrap.css"
 import { Link } from "react-router-dom";
 

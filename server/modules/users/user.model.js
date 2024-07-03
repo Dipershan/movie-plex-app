@@ -1,47 +1,25 @@
-const { required } = require("joi");
-const { Schema ,  model } =  require("mongoose");
+const { Schema, model } = require("mongoose");
 
 const userSchema = new Schema(
-    {
-    name : {
-        type:String,
-        required:true,
-        unique:true,
-
+  {
+    name: { type: String, required: true },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
     },
-    password:{
-            type:String ,
-            required:true
-        },
+    password: { type: String, required: true, select: false },
     roles: {
-            type: [String],
-            default: ["user"],
-            required:true,
-        },
-     image: {
-        type: String
+      type: Array,
+      default: ["user"],
+      required: true,
     },
-    otp: {
-        type:String,
-        
-    },
-    isEmailVerified : {
-        type:Boolean ,
-        required:true,
-        default:false,
-    },
-    isActive :{
-        type:Boolean,
-        required: true,
-        default: true,
-    },
-
-    },
-    {timestamps: true}
-
-    
+    image: { type: String },
+    otp: { type: String },
+    isEmailVerified: { type: Boolean, required: true, default: false },
+    isActive: { type: Boolean, required: true, default: true },
+  },
+  { timestamps: true }
 );
 
-
-
-module.exports = model("User" ,  userSchema);
+module.exports = model("User", userSchema);

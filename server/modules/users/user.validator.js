@@ -1,38 +1,30 @@
-const Joi  = require("joi");
+const Joi = require("joi");
 
-//Schema
+// schema define
 
-const schema = Joi.object
-({
-    name: Joi .string(),
-    email: Joi.string()
-        .email({
-             minDomainSegments: 1,
-             tlds: { allow: ['com'] 
-                    }
-                })
+const userSchema = Joi.object({
+  name: Joi.string(),
+  email: Joi.string()
+    .email({
+      minDomainSegments: 2,
+      tlds: { allow: ["com", "np"] },
+    })
     .required(),
-    password: Joi.string().required(),
-    roles: Joi.string().valid("admin", "user"),  // No .items() for a single string
-    isEmailVerified: Joi.boolean(),
-    Active :  Joi.boolean(),
+  password: Joi.string().required(),
+  roles: Joi.array().items(Joi.string().valid("admin", "user")),
+  image: Joi.string(),
+  isEmailVerified: Joi.boolean(),
+  isActive: Joi.boolean(),
+});
 
-    
-
-})
-
-//Middleware for validator
-const validator =async (req , res , next) =>{
-    
-try {
-    await schema.validateAsync(req.body);
+// mw define
+const validator = async (req, res, next) => {
+  try {
+    await userSchema.validateAsync(req.body);
     next();
-}
-catch (err) { 
-    next(err)
-}
+  } catch (e) {
+    next(e);
+  }
 };
 
-
-module.exports = {validator};
-
+module.exports = { validator };

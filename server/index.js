@@ -1,50 +1,39 @@
 require("dotenv").config();
-const morgan  =  require("morgan");
-const mongoose =  require("mongoose");
-const express =  require("express");
+const cors = require("cors");
+const express = require("express");
+const mongoose = require("mongoose");
+const morgan = require("morgan");
 
-const indexRouter =  require("./routes");
+const indexRouter = require("./routes");
 
-mongoose.connect(process.env.DB_URL).then(()=>{
-    console.log("Database Connected sucessful")
-}).catch((e)=>{
-    console.log("Database erorr" ,e)
-})
+mongoose
+  .connect(process.env.DB_URL)
+  .then(() => {
+    console.log("Database connected successfully...");
+  })
+  .catch((e) => {
+    console.log("Database Error", e);
+  });
 
-const router =  express.Router();
-const app  =  express();
-const PORT =  process.env.PORT;
+const app = express();
+const PORT = Number(process.env.PORT);
+// I can parse request body as json
 
-//I can parse request body as json || Middleware
+app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
-app.use(express.static("public"))
+app.use("/assets", express.static("public"));
+// http://localhost:9000/assets/uploads/<upload-file>
 
-//MiddleWare (application level custom mw)
-// app.use((req ,res , next)=>{
-//     req.body.country = "NP";
-//     req.body.currency =  "NPR";
-//     req.body.currentTime = new Date().toISOString();
-//     next();
-// })
+// I am the routing mechanism, I will send the API request from / to indexRouter
+app.use("/", indexRouter);
 
-//I am routing mechanism  , I will send the API index from/to indexrouter
-//Route Handling
-app.use("/" ,  indexRouter);
-
-
-
-//Error Handling
-app.use((err , req , res, next) =>{
-    const errorMsg =  err ? err.toString() : "Something went Wrong";
-    res.status(500).json({msg:errorMsg});
+// Error Handling
+app.use((err, req, res, next) => {
+  const errorMsg = err ? err.toString() : "Something went wrong";
+  res.status(500).json({ msg: errorMsg });
 });
 
-
-
-app.listen(PORT , () =>{
-    console.log(`Application is running on ${PORT}`);
+app.listen(PORT, () => {
+  console.log(`Application is running on port ${PORT}`);
 });
-
-module.exports  = router;
-

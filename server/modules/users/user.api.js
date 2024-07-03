@@ -1,163 +1,178 @@
-const router = require('express').Router();
-const { generateToken } = require('../../utils/token');
-const { secure } = require('../../utils/secure');
-const { validator } = require('./user.validator');
-const multer = require('multer');
-const userController = require('./user.controller');
+const multer = require("multer");
+const router = require("express").Router();
+const { secure } = require("../../utils/secure");
+
+const userController = require("./user.controller");
+
+const { validator } = require("./user.validator");
 
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'public/upload');
-    },
-    filename: function (req, file, cb) {
-        console.log({ file }, Date.now());
-        cb(
-            null,
-            file.fieldname.concat(
-                '-',
-                Date.now(),
-                '.',
-                file.originalname.split('.').pop()  // Ensure to get the file extension dynamically
-            )
-        );
-    }
+  destination: function (req, file, cb) {
+    cb(null, "public/upload/users");
+  },
+  filename: function (req, file, cb) {
+    cb(
+      null,
+      file.fieldname.concat(
+        "-",
+        Date.now(),
+        ".",
+        file.originalname.split(".")[1]
+      )
+    );
+  },
+  // How to limit the file size; 1MB limit??
 });
 
-const upload = multer({
-    storage: storage,
-    limits: { fileSize: 1024 * 1024 } // 1 MB limit
-});
+const upload = multer({ storage: storage });
 
-router.post('/register', upload.single('profile'), validator, async (req, res, next) => {
-    console.log('Register route hit');
+router.post(
+  "/register",
+  upload.single("profile"), // req.body, req.file, req.files
+  validator,
+  async (req, res, next) => {
     try {
-        if (req.file) {
-            req.body.profile = req.file.path;
-        }
-        const result = await userController.create(req.body);
-        res.json({ msg: 'User Registered Successfully', user: result });
-    } catch (error) {
-        next(error);
+      if (req.file) {
+        req.body.profile = req.file.path;
+      }
+      await userController.create(req.body);
+      res.json({ msg: "User Registered Successfully" });
+    } catch (e) {
+      next(e);
     }
+  }
+);
+
+router.post("/login", async (req, res, next) => {
+  try {
+    const result = await userController.login(req.body);
+    res.json({ msg: "User successfully logged in", data: result });
+  } catch (e) {
+    next(e);
+  }
 });
 
-router.post('/login', async (req, res, next) => {
-    console.log('Login route hit');
-    try {
-        const result = await userController.login(req.body);
-        res.json({ msg: 'User logged in successfully', data: result });
-    } catch (error) {
-        next(error);
-    }
+router.post("/generate-email-token", async (req, res, next) => {
+  try {
+    const result = await userController.generateEmailToken(req.body);
+    res.json({ msg: "Email successfully sent", data: result });
+  } catch (e) {
+    next(e);
+  }
 });
 
-// Add more routes as necessary, ensuring each has appropriate logging
-
-router.get('/', secure(['admin']), async(req, res, next) => {
-    
-    try {
-        const {page ,  limit , name}  = req.query;
-        const search = {name , email}
-        const data = await userController.list({page,  limit , search});
-        
-        res.json({ msg: 'User list generated', data: [] });
-    } catch (error) {
-        next(error);
-    }
+router.post("/verify-email-token", async (req, res, next) => {
+  try {
+    const result = await userController.verifyEmailToken(req.body);
+    res.json({ msg: "Email successfully verifed", data: result });
+  } catch (e) {
+    next(e);
+  }
 });
 
-router.post('/generate-email-token', async (req, res, next) => {
-    console.log('Generate email token');
-    try {
-        const result = await userController.generateEmailToken(req.body);
-        res.json({ msg: 'Email token generated successfully', data: result });
-    } catch (error) {
-        next(error);
-    }
+// User Day 2
+
+router.get("/", secure(["admin"]), async (req, res, next) => {
+  try {
+    const { page, limit, name, email } = req.query;
+    const search = { name, email };
+    const data = await userController.list({ page, limit, search });
+    res.json({ msg: "User List generated", data });
+  } catch (e) {
+    next(e);
+  }
 });
 
-router.post('/verify-email-token', async (req, res, next) => {
-    console.log('Verify email token');
-    try {
-        const result = await userController.verifyEmailToken(req.body);
-        res.json({ msg: 'Email successfully verified', data: result });
-    } catch (error) {
-        next(error);
-    }
+router.patch("/:id/block", secure(["admin"]), async (req, res, next) => {
+  try {
+    const result = await userController.blockUser(req.params.id);
+    res.json({ msg: "User status updated Successfully", data: result });
+  } catch (e) {
+    next(e);
+  }
 });
 
-// Add remaining routes as necessary, ensuring each has appropriate logging
-
-router.patch('/:id/block', async (req, res, next) => {
-    console.log('Block user');
-    try {
-        // Your logic here
-    } catch (error) {
-        next(error);
-    }
+router.delete("/:id", secure(["admin"]), async (req, res, next) => {
+  try {
+    const result = await userController.removeById(req.params.id);
+    res.json({ msg: "User Deleted successfully", data: result });
+  } catch (e) {
+    next(e);
+  }
 });
 
-router.delete('/:id', async (req, res, next) => {
-    console.log('Delete user');
-    try {
-        // Your logic here
-    } catch (error) {
-        next(error);
-    }
+router.get("/profile", secure(), async (req, res, next) => {
+  try {
+    const result = await userController.getProfile(req.currentUser);
+    res.json({ msg: "User Profile generated", data: result });
+  } catch (e) {
+    next(e);
+  }
 });
 
-router.get('/profile', async (req, res, next) => {
-    console.log('Get user profile');
-    try {
-        // Your logic here
-    } catch (error) {
-        next(error);
-    }
+// Day 3
+
+router.put("/profile", secure(), async (req, res, next) => {
+  try {
+    const result = await userController.updateById(req.currentUser, req.body);
+    res.json({ msg: "User Profile Updated successfully", data: result });
+  } catch (e) {
+    next(e);
+  }
 });
 
-router.put('/profile', async (req, res, next) => {
-    console.log('Update user profile');
-    try {
-        // Your logic here
-    } catch (error) {
-        next(error);
-    }
+router.get("/:id", secure(["admin"]), async (req, res, next) => {
+  try {
+    const result = await userController.getById(req.params.id);
+    res.json({ msg: "User detail generated", data: result });
+  } catch (e) {
+    next(e);
+  }
 });
 
-router.get('/:id', async (req, res, next) => {
-    console.log('Get user by ID');
+router.post(
+  "/change-password",
+  secure(["user", "admin"]),
+  async (req, res, next) => {
     try {
-        // Your logic here
-    } catch (error) {
-        next(error);
+      const result = await userController.changePassword(
+        req.currentUser,
+        req.body
+      );
+      res.json({ msg: "Password changed successfully", data: result });
+    } catch (e) {
+      next(e);
     }
+  }
+);
+
+router.post("/reset-password", secure(["admin"]), async (req, res, next) => {
+  try {
+    const { id, newPassword } = req.body;
+    if (!id || !newPassword) throw new Error("Something is missing");
+    const result = await userController.resetPassword(id, newPassword);
+    res.json({ msg: "Password Reset Successfully", data: result });
+  } catch (e) {
+    next(e);
+  }
 });
 
-router.post('/change-password', async (req, res, next) => {
-    console.log('Change password');
-    try {
-        // Your logic here
-    } catch (error) {
-        next(error);
-    }
+router.post("/forget-password-token", async (req, res, next) => {
+  try {
+    const result = await userController.forgetPasswordTokenGen(req.body);
+    res.json({ msg: "FP Token sent successfully", data: result });
+  } catch (e) {
+    next(e);
+  }
 });
 
-router.post('/reset-password', async (req, res, next) => {
-    console.log('Reset password');
-    try {
-        // Your logic here
-    } catch (error) {
-        next(error);
-    }
-});
-
-router.post('/forget-password', async (req, res, next) => {
-    console.log('Forget password');
-    try {
-        // Your logic here
-    } catch (error) {
-        next(error);
-    }
+router.post("/forget-password", async (req, res, next) => {
+  try {
+    const result = await userController.forgetPasswordPassChange(req.body);
+    res.json({ msg: "Password changed successfully", data: result });
+  } catch (e) {
+    next(e);
+  }
 });
 
 module.exports = router;

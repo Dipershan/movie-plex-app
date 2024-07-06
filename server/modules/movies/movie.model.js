@@ -12,12 +12,10 @@ const movieSchema = new Schema({
     slug :{
         type:String,
         unique:true,
-    },
-    
+    }, 
     duration:{
         type:String,
     }  ,
-
     synopsis:{
             type:String,
     },
@@ -28,12 +26,15 @@ const movieSchema = new Schema({
     releaseDate:{
         type:Date,
         required:true,
-        default:Date.now(),
-        
+        default:Date.now(), 
     },
     endDate:{
         type:Date,
         required:true,
+    },
+    rating:{
+        type:Number,
+        default:0,
     },
     seats:{
         type:Number,
@@ -48,17 +49,17 @@ const movieSchema = new Schema({
     createdBy:{
         type: ObjectId,
         ref:"User",
-
     },
     updatedBy:{
         type : ObjectId,
         ref:""
+    },
+},
+    {
+        timestamps: true,
     }
 
-
-
-
-});
+);
 
 https: module.exports = model("Movie" ,  movieSchema);
 

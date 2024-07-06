@@ -1,0 +1,203 @@
+[
+    {
+        "title": "The Epic Journey",
+        "slug": "the-epic-journey",
+        "duration": "120 minutes",
+        "synopsis": "The Epic Journey is an exhilarating tale of adventure and self-discovery. Follow the protagonist, Alex, as he embarks on a quest across treacherous terrains and uncharted territories. Along the way, Alex encounters diverse characters, each with their unique backgrounds and stories, adding richness to his journey. As he faces numerous challenges, Alex learns invaluable lessons about courage, friendship, and resilience. The narrative seamlessly weaves moments of intense action with reflective pauses, allowing viewers to connect deeply with the characters' emotional arcs. The film's stunning visuals and meticulously crafted world-building transport audiences into a realm where the line between reality and fantasy blurs. With a compelling soundtrack that enhances the storytelling, The Epic Journey is a cinematic masterpiece that resonates long after the credits roll. This movie is a testament to the power of dreams and the strength of the human spirit, making it a must-watch for anyone seeking inspiration and a touch of magic in their lives.",
+        "releaseDate": "2024-07-04T00:00:00Z",
+        "endDate": "2024-08-04T00:00:00Z",
+        "seats": 150,
+        "price": 300
+    },
+    {
+        "title": "Whispers in the Wind",
+        "slug": "whispers-in-the-wind",
+        "duration": "130 minutes",
+        "synopsis": "Whispers in the Wind is a poignant drama that delves into the intricate tapestry of human emotions and relationships. The story revolves around Sarah, a young woman grappling with the loss of her beloved grandmother. As Sarah sifts through her grandmother's belongings, she uncovers a series of letters that reveal long-buried family secrets. These letters take Sarah on a journey through time, as she learns about the trials, triumphs, and love stories of her ancestors. The film beautifully captures the essence of intergenerational bonds and the enduring impact of the past on the present. With heartfelt performances and a script that deftly balances moments of joy and sorrow, Whispers in the Wind offers a deeply moving cinematic experience. The lush cinematography and evocative musical score further enhance the film's emotional resonance, making it a memorable exploration of love, loss, and the power of memory.",
+        "releaseDate": "2024-07-10T00:00:00Z",
+        "endDate": "2024-08-10T00:00:00Z",
+        "seats": 120,
+        "price": 250
+    },
+    {
+        "title": "Mystic Realms",
+        "slug": "mystic-realms",
+        "duration": "140 minutes",
+        "synopsis": "Mystic Realms is a breathtaking fantasy adventure that transports viewers to a magical world filled with wonder and danger. The story follows Elara, a young sorceress, as she embarks on a quest to save her homeland from an ancient evil. With the help of a ragtag group of allies, including a wise old wizard, a skilled warrior, and a mischievous thief, Elara must navigate treacherous landscapes, solve intricate puzzles, and confront powerful enemies. The film's richly detailed world-building and imaginative creature designs create an immersive experience that captivates audiences of all ages. Mystic Realms is a celebration of bravery, friendship, and the enduring power of hope. The movie's stunning visual effects and epic battle scenes are complemented by a soaring musical score, making it a must-see for fans of fantasy and adventure.",
+       "releaseDate": "2024-07-15T00:00:00Z",
+        "endDate": "2024-08-15T00:00:00Z",
+        "seats": 200,
+        "price": 350
+    },
+    {
+        "title": "Echoes of Eternity",
+        "slug": "echoes-of-eternity",
+        "duration": "150 minutes",
+        "synopsis": "Echoes of Eternity is a sweeping historical epic that spans generations and continents. The film chronicles the lives of several families, tracing their interconnected stories from the early 20th century to the present day. At its core, Echoes of Eternity is a story about the enduring power of love and the ways in which our ancestors' choices shape our destinies. The film's intricate narrative weaves together moments of personal triumph and tragedy, set against the backdrop of significant historical events. With its lush cinematography and meticulously researched period details, Echoes of Eternity offers a visually stunning and emotionally resonant experience. The ensemble cast delivers powerful performances, bringing depth and nuance to their characters' journeys. The film's hauntingly beautiful musical score underscores the emotional weight of the story, making Echoes of Eternity a timeless and unforgettable cinematic achievement.",
+       "releaseDate": "2024-07-20T00:00:00Z",
+        "endDate": "2024-08-20T00:00:00Z",
+        "seats": 180,
+        "price": 400
+    },
+    {
+        "title": "The Silent Observer",
+        "slug": "the-silent-observer",
+        "duration": "110 minutes",
+        "synopsis": "The Silent Observer is a gripping psychological thriller that keeps viewers on the edge of their seats. The story follows Detective Jane Harris as she investigates a series of mysterious disappearances in a small town. As Jane delves deeper into the case, she begins to uncover a web of secrets and lies that point to a sinister conspiracy. The film's tense atmosphere and intricate plot twists create a sense of unease and suspense that builds to a shocking climax. The Silent Observer explores themes of trust, paranoia, and the lengths to which people will go to protect their secrets. The film's moody cinematography and haunting musical score enhance the sense of dread and tension, making it a must-watch for fans of the thriller genre.",
+        "releaseDate": "2024-07-25T00:00:00Z",
+        "endDate": "2024-08-25T00:00:00Z",
+        "seats": 100,
+        "price": 220
+    },
+    {
+        "title": "A Love Beyond Time",
+        "slug": "a-love-beyond-time",
+        "duration": "125 minutes",
+        "synopsis": "A Love Beyond Time is a heartwarming romantic drama that transcends the boundaries of time and space. The film tells the story of Emily and Daniel, two star-crossed lovers separated by centuries but connected by an unbreakable bond. When Emily, a historian, discovers an old diary that once belonged to Daniel, a soldier from the 18th century, she is transported back in time to meet him. As they navigate the challenges of their respective worlds, Emily and Daniel must find a way to be together against all odds. A Love Beyond Time beautifully explores themes of destiny, sacrifice, and the enduring power of love. The film's lush period settings and captivating performances bring the story to life, making it a timeless tale that resonates with audiences of all ages.",
+        "releaseDate": "2024-07-30T00:00:00Z",
+        "endDate": "2024-08-30T00:00:00Z",
+        "seats": 130,
+        "price": 270
+    },
+    {
+        "title": "The Last Guardian",
+        "slug": "the-last-guardian",
+        "duration": "135 minutes",
+        "synopsis": "The Last Guardian is an epic action-adventure film that follows the journey of Aiden, the last surviving member of an ancient order of warriors. Tasked with protecting a powerful artifact that holds the key to humanity's survival, Aiden must fend off relentless enemies determined to seize the artifact for their own nefarious purposes. Along the way, Aiden forms an unlikely alliance with a group of rebels who share his mission to save the world. The Last Guardian is a thrilling ride filled with intense battles, breathtaking landscapes, and moments of deep emotional resonance. The film's expertly choreographed action sequences and stunning visual effects create a truly immersive experience. At its core, The Last Guardian is a story about courage, loyalty, and the enduring fight for what is right.",
+        "releaseDate": "2024-08-01T00:00:00Z",
+        "endDate": "2024-09-01T00:00:00Z",
+        "seats": 160,
+        "price": 420
+    },
+    {
+        "title": "Shadows of the Past",
+        "slug": "shadows-of-the-past",
+        "duration": "115 minutes",
+        "synopsis": "Shadows of the Past is a riveting mystery drama that delves into the complexities of memory and identity. The film follows Laura, a woman struggling to piece together her fragmented memories after a traumatic accident. As Laura begins to uncover hidden truths about her past, she realizes that her life is entangled with a series of unsolved crimes. With the help of a determined detective, Laura embarks on a quest to unravel the mysteries that have haunted her for years. Shadows of the Past masterfully combines suspenseful storytelling with a deep exploration of the human psyche. The film's atmospheric cinematography and evocative score create a hauntingly beautiful backdrop for the unfolding drama. With its compelling performances and intricate plot, Shadows of the Past is a thought-provoking and emotionally resonant film.",
+        "releaseDate": "2024-08-05T00:00:00Z",
+        "endDate": "2024-09-05T00:00:00Z",
+        "seats": 140,
+        "price": 240
+    },
+    {
+        "title": "Journey to the Unknown",
+        "slug": "journey-to-the-unknown",
+        "duration": "125 minutes",
+        "synopsis": "Journey to the Unknown is an inspiring sci-fi adventure that explores the limitless possibilities of the human spirit. The film follows Dr. Emma Carter, a brilliant scientist who discovers a wormhole that leads to a distant galaxy. Determined to uncover the secrets of the universe, Emma assembles a team of explorers and embarks on a journey that takes them beyond the known boundaries of space and time. As they navigate uncharted worlds and encounter alien civilizations, the team must confront their deepest fears and uncertainties. Journey to the Unknown is a visually stunning and thought-provoking film that challenges viewers to imagine what lies beyond the stars. The film's breathtaking special effects and captivating narrative make it a must-see for fans of science fiction and adventure.",
+        "releaseDate": "2024-08-10T00:00:00Z",
+        "endDate": "2024-09-10T00:00:00Z",
+        "seats": 180,
+        "price": 380
+    },
+    {
+        "title": "The Hidden Truth",
+        "slug": "the-hidden-truth",
+        "duration": "120 minutes",
+        "synopsis": "The Hidden Truth is a gripping crime thriller that follows investigative journalist Mark Anderson as he uncovers a massive conspiracy within a powerful corporation. When Mark receives a tip about a series of unexplained deaths, he begins to dig deeper, only to find himself entangled in a dangerous web of lies and deceit. As he races against time to expose the truth, Mark must navigate a perilous landscape filled with corrupt officials, ruthless criminals, and shadowy figures determined to keep their secrets hidden. The Hidden Truth is a tense and electrifying film that keeps viewers on the edge of their seats from start to finish. The film's sharp dialogue, complex characters, and unexpected twists make it a standout in the thriller genre. With its compelling narrative and intense atmosphere, The Hidden Truth is a must-watch for fans of suspense and intrigue.",
+       "releaseDate": "2024-08-15T00:00:00Z",
+        "endDate": "2024-09-15T00:00:00Z",
+        "seats": 110,
+        "price": 260
+    },
+    {
+        "title": "Rise of the Phoenix",
+        "slug": "rise-of-the-phoenix",
+        "duration": "130 minutes",
+        "synopsis": "Rise of the Phoenix is an epic tale of redemption and rebirth. The film follows Isabella, a young woman who rises from the ashes of her troubled past to become a symbol of hope and resilience. After losing everything she holds dear, Isabella embarks on a journey of self-discovery, determined to rebuild her life and make a difference in the world. Along the way, she encounters a diverse cast of characters who challenge her perceptions and inspire her to push beyond her limits. Rise of the Phoenix is a visually stunning and emotionally powerful film that explores themes of loss, recovery, and the transformative power of hope. The film's breathtaking cinematography and evocative score create an immersive experience that resonates deeply with audiences. With its compelling performances and uplifting message, Rise of the Phoenix is a cinematic triumph.",
+       "releaseDate": "2024-08-20T00:00:00Z",
+        "endDate": "2024-09-20T00:00:00Z",
+        "seats": 150,
+        "price": 310
+    },
+    {
+        "title": "Echoes of Silence",
+        "slug": "echoes-of-silence",
+        "duration": "115 minutes",
+        "synopsis": "Echoes of Silence is a hauntingly beautiful drama that explores the complexities of grief and healing. The film follows Anna, a woman who retreats to a secluded cabin in the woods after the sudden death of her husband. As Anna grapples with her loss, she begins to experience strange phenomena that blur the line between reality and the supernatural. With the help of a local historian, Anna uncovers the tragic history of the cabin and its previous inhabitants. Echoes of Silence is a deeply moving film that delves into the depths of human emotion and the power of the past to shape our present. The film's atmospheric cinematography and haunting score create a sense of unease and introspection, making it a poignant exploration of love, loss, and the enduring connection between the living and the dead.",
+        "releaseDate": "2024-08-25T00:00:00Z",
+        "endDate": "2024-09-25T00:00:00Z",
+        "seats": 120,
+        "price": 230
+    },
+    {
+        "title": "Beyond the Horizon",
+        "slug": "beyond-the-horizon",
+        "duration": "140 minutes",
+        "synopsis": "Beyond the Horizon is a captivating science fiction adventure that takes viewers on a journey to the farthest reaches of the galaxy. The film follows Captain Alex Turner and his crew as they embark on a mission to explore a newly discovered planet that holds the promise of untold wonders. As they navigate the challenges of space travel and encounter alien species, the crew must confront their own fears and insecurities. Beyond the Horizon is a visually stunning film that combines breathtaking special effects with a thought-provoking narrative. The film's exploration of themes such as exploration, discovery, and the human spirit makes it a compelling and inspiring cinematic experience. With its richly detailed world-building and compelling characters, Beyond the Horizon is a must-see for fans of science fiction and adventure.",
+        "poster": "poster13.jpg",
+        "releaseDate": "2024-08-30T00:00:00Z",
+        "endDate": "2024-09-30T00:00:00Z",
+        "seats": 170,
+        "price": 360
+    },
+    {
+        "title": "The Silent Storm",
+        "slug": "the-silent-storm",
+        "duration": "110 minutes",
+        "synopsis": "The Silent Storm is a powerful drama that delves into the complexities of mental health and the human condition. The film follows Dr. Emily Richards, a psychiatrist who becomes deeply involved in the lives of her patients. As she navigates the challenges of her profession, Emily must also confront her own personal demons and the impact of her past on her present. The Silent Storm is a deeply moving film that explores themes of trauma, healing, and the resilience of the human spirit. The film's nuanced performances and thoughtful storytelling create a profound and emotionally resonant experience. With its compassionate portrayal of mental health and its compelling narrative, The Silent Storm is a film that leaves a lasting impression.",
+       "releaseDate": "2024-09-01T00:00:00Z",
+        "endDate": "2024-10-01T00:00:00Z",
+        "seats": 100,
+        "price": 240
+    },
+    {
+        "title": "A Glimpse of Infinity",
+        "slug": "a-glimpse-of-infinity",
+        "duration": "120 minutes",
+        "synopsis": "A Glimpse of Infinity is a mesmerizing sci-fi drama that explores the mysteries of the universe and the nature of existence. The film follows Dr. Sophia Bennett, a physicist who discovers a portal to a parallel dimension. As Sophia and her team navigate this new reality, they uncover profound truths about the nature of time, space, and consciousness. A Glimpse of Infinity is a visually stunning film that combines thought-provoking science fiction with deep philosophical questions. The film's exploration of themes such as reality, identity, and the interconnectedness of all things creates a rich and immersive experience. With its captivating narrative and stunning visuals, A Glimpse of Infinity is a film that challenges viewers to rethink their understanding of the world and their place in it.",
+        "releaseDate": "2024-09-05T00:00:00Z",
+        "endDate": "2024-10-05T00:00:00Z",
+        "seats": 140,
+        "price": 280
+    },
+    {
+        "title": "The Forgotten Kingdom",
+        "slug": "the-forgotten-kingdom",
+        "duration": "135 minutes",
+        "synopsis": "The Forgotten Kingdom is an epic fantasy adventure that transports viewers to a magical world filled with wonder and danger. The film follows Prince Aric, who embarks on a quest to reclaim his lost kingdom from the clutches of an evil sorcerer. Along the way, Aric forms alliances with a diverse group of characters, including a fierce warrior, a wise old sage, and a cunning thief. The Forgotten Kingdom is a visually stunning film that combines breathtaking special effects with a compelling narrative. The film's richly detailed world-building and imaginative creature designs create an immersive experience that captivates audiences of all ages. With its themes of courage, friendship, and the fight for justice, The Forgotten Kingdom is a timeless tale that resonates deeply with viewers.",
+        "releaseDate": "2024-09-10T00:00:00Z",
+        "endDate": "2024-10-10T00:00:00Z",
+        "seats": 180,
+        "price": 420
+    },
+    {
+        "title": "A New Dawn",
+        "slug": "a-new-dawn",
+        "duration": "120 minutes",
+        "synopsis": "A New Dawn is an inspiring drama that tells the story of Maria, a young woman who rises above her circumstances to create a better life for herself and her family. After facing numerous challenges, including poverty and discrimination, Maria refuses to give up on her dreams. With determination and resilience, she pursues an education and becomes a successful entrepreneur. A New Dawn is a powerful film that explores themes of perseverance, hope, and the transformative power of education. The film's heartfelt performances and uplifting message create a deeply moving experience that resonates with audiences. With its compelling narrative and inspiring characters, A New Dawn is a testament to the strength of the human spirit and the importance of never giving up on one's dreams.",        
+        "releaseDate": "2024-09-15T00:00:00Z",
+        "endDate": "2024-10-15T00:00:00Z",
+        "seats": 160,
+        "price": 340
+    },
+    {
+        "title": "The Secret Garden",
+        "slug": "the-secret-garden",
+        "duration": "115 minutes",
+        "synopsis": "The Secret Garden is a heartwarming family drama that tells the story of Mary, a young orphan who discovers a hidden garden on her uncle's estate. As Mary tends to the garden, she begins to heal from the trauma of losing her parents and forms a bond with her reclusive uncle and his bedridden son. The Secret Garden is a visually stunning film that captures the beauty of nature and the power of healing. The film's lush cinematography and evocative score create an immersive experience that resonates with audiences of all ages. With its themes of hope, resilience, and the transformative power of nature, The Secret Garden is a timeless tale that continues to inspire and uplift viewers.",
+        "releaseDate": "2024-09-20T00:00:00Z",
+        "endDate": "2024-10-20T00:00:00Z",
+        "seats": 140,
+        "price": 300
+    },
+    {
+        "title": "The Enchanted Forest",
+        "slug": "the-enchanted-forest",
+        "duration": "130 minutes",
+        "synopsis": "The Enchanted Forest is a magical fantasy adventure that follows the journey of a young girl named Lily, who discovers a hidden world filled with mythical creatures and ancient secrets. When her village is threatened by a dark force, Lily must embark on a quest to find a legendary artifact that holds the key to saving her people. Along the way, she forms alliances with a diverse cast of characters, including a brave warrior, a wise old wizard, and a mischievous fairy. The Enchanted Forest is a visually stunning film that combines breathtaking special effects with a compelling narrative. The film's richly detailed world-building and imaginative creature designs create an immersive experience that captivates audiences of all ages. With its themes of courage, friendship, and the fight for justice, The Enchanted Forest is a timeless tale that resonates deeply with viewers.",
+        "releaseDate": "2024-09-25T00:00:00Z",
+        "endDate": "2024-10-25T00:00:00Z",
+        "seats": 150,
+        "price": 320
+    },
+    {
+        "title": "The Eternal Flame",
+        "slug": "the-eternal-flame",
+        "duration": "120 minutes",
+        "synopsis": "The Eternal Flame is a gripping action-adventure film that follows the journey of Jack, a former soldier who must use his skills to protect a powerful artifact from falling into the wrong hands. When a ruthless crime lord sets his sights on the artifact, Jack teams up with a group of skilled fighters to stop him. The Eternal Flame is a thrilling ride filled with intense battles, breathtaking landscapes, and moments of deep emotional resonance. The film's expertly choreographed action sequences and stunning visual effects create a truly immersive experience. At its core, The Eternal Flame is a story about courage, loyalty, and the enduring fight for what is right. The film's compelling characters and high-stakes narrative make it a must-see for fans of action and adventure.",
+        "releaseDate": "2024-09-30T00:00:00Z",
+        "endDate": "2024-10-30T00:00:00Z",
+        "seats": 170,
+        "price": 360
+    }
+]

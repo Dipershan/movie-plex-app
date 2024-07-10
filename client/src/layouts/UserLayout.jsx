@@ -1,18 +1,19 @@
-import React from 'react';
+
 import { Outlet } from 'react-router-dom';
 import UserNavbar from "./UserNavbar";
 import UserFooter from "./UserFooter";
 
 
+
 const UserLayout = () => {
   return (
-    <div className="container-fluid">
+    <div>
       <div>
         <UserNavbar/>
       </div>
-      <div>
+      <main style={{minHeight:"60vh"}}>
         <Outlet />
-      </div>
+      </main>
       <div>
         <UserFooter />
       </div>

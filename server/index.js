@@ -19,6 +19,12 @@ const app = express();
 const PORT = Number(process.env.PORT);
 // I can parse request body as json
 
+app.use((req , res , next)=>{
+  setTimeout(()=>{
+    next();
+  },2000);
+});
+
 app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));

@@ -1,32 +1,83 @@
-import { useState, useEffect } from "react";
+
+import "./Home.css";
+import { useCallback, useEffect, useState } from "react";
+import { Form } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { IoIosBasket } from "react-icons/io";
-import Form from 'react-bootstrap/Form';
-import { Link } from "react-router-dom"
+
+import { useDispatch, useSelector } from "react-redux";
+import { add, getCount } from "../../slices/cartSlice";
+
 import { useMovies } from "../../hooks/useMovies";
+
 
 
 import "./Home.css";
 
 const Home = () => {
 
+   const { cart } = useSelector((state) => state.cart);
   const [limit , setLimit] =useState(20);
   const [page ,  setPage] = useState(1);
   const [title ,  setTitle] =  useState("");
+  const dispatch = useDispatch();
+  const [featuredMov, setFeaturedMov] = useState(null);
 
 
   const {data  , error ,  msg ,  loading ,  getAllMovies } = useMovies();
 
-  // const getFeaturedMovies = ()=>{
-  // return  data?.data?.movies[0] || {};
-    
-  // }
+
+  const getFeaturedMovie = useCallback(() => {
+    const result = data?.data?.movies[0];
+    setFeaturedMov(result);
+  }, [data]);
+
 
 
   useEffect(()=>{
     getAllMovies({limit , page, title});
   },[ limit ,  page ,title,   getAllMovies]);
+
+  useEffect(() => {
+    if (!featuredMov) getFeaturedMovie();
+  }, [featuredMov, getFeaturedMovie]);
   return  (
    <>
+      <div className="container">
+        <div className="row m-5">
+          <div className="col-md-9">
+            <h2 className="featurette-heading">{featuredMov?.title}</h2>
+            <p className="lead">{featuredMov?.synopsis}</p>
+            <div className="flex d-flex gap-2">
+              <button
+                className="btn btn-primary"
+                onClick={() => {
+                  dispatch(add(featuredMov));
+                }}
+              >
+                <IoIosBasket />
+                &nbsp;
+                {cart.length > 0 &&
+                cart.filter((item) => item?.slug === featuredMov?.slug).length >
+                  0
+                  ? `(${
+                      cart.filter((item) => item.slug === featuredMov.slug)[0]
+                        ?.quantity
+                    })`
+                  : `(0)`}
+              </button>
+              <Link to={`/movies/${featuredMov?.slug}`}>
+                <button className="btn btn-danger">Buy Now</button>
+              </Link>
+            </div>
+          </div>
+          <div className="col-md-3">
+            <img src={featuredMov?.poster} style={{ maxHeight: "420px" }} />
+          </div>
+        </div>
+      </div>
+
+
 
     <div className="container">
 
@@ -58,8 +109,23 @@ const Home = () => {
                     </p>
                     <div className="d-flex justify-content-between align-items-center">
                       <div className="btn-group">
-                        <button type="button" className="btn btn-sm btn-outline-primary">
+                        <button type="button" className="btn btn-sm btn-outline-primary"
+                          onClick={() => {
+                            dispatch(add(movie));
+                          }}
+                          >
                         <IoIosBasket />
+                        &nbsp;
+                              {cart.length > 0 &&
+                              cart.filter((item) => item.slug === movie.slug)
+                                .length > 0
+                                ? `(${
+                                    cart.filter(
+                                      (item) => item?.slug === movie?.slug
+                                    )[0]?.quantity
+                                  })`
+                                : `(0)`}
+                        {dispatch(getCount(movie))}
                         </button>
                         <Link to={`/movies/${movie?.slug}` }>
                         <button type="button" className="btn btn-sm btn-outline-danger">

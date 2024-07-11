@@ -38,7 +38,7 @@ export const useMovies = () => {
       setMsg(result.data.msg);
       return result.data.data;
     } catch (err) {
-      const errMsg = err.response.data.msg || "Something went wrong";
+      const errMsg = err?.response?.data?.msg || "Something went wrong";
       setError(errMsg);
     } finally {
       setLoading(false);

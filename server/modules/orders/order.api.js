@@ -1,79 +1,62 @@
-const router =  require("express").Router();
-const { secure } =  require("../../utils/secure");
+const router = require("express").Router();
 const orderController = require("./order.controller");
+const { secure } = require("../../utils/secure");
 
-/**
- * Create
- * list
- * read one order
- * delete the order
- * change the status of order
- * updta
- */
+router.get("/", secure(), async (req, res, next) => {
+  try {
+    console.log("Here");
+    const { page, limit, showAll } = req.query;
+    const search = {
+      id: showAll && req.isAdmin ? "" : req.currentUser,
+    };
+    const result = await orderController.list({ page, limit, search });
+    res.json({ msg: "List all orders", data: result });
+  } catch (e) {
+    next(e);
+  }
+});
 
+router.post("/", secure(), async (req, res, next) => {
+  try {
+    const result = await orderController.create(req.body);
+    res.json({
+      msg: "Order created Successfully. We will reach out to you soon.",
+      data: result,
+    });
+  } catch (e) {
+    next(e);
+  }
+});
 
-///secure()
-router.post("/"  ,async (req , res , next)=>{
-    try {
-        const result = await orderController.create(req.body);
-        
-        res.json({"msg" : "created order"  ,  data:result})
-    } catch (error) {
-        next(error);
-    }
-} );
+router.get("/:id", secure(), async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const result = await orderController.getById(id);
+    res.json({ msg: `Get one Order by ${id}`, data: result });
+  } catch (e) {
+    next(e);
+  }
+});
 
-router.get("/"  , (req , res , next)=>{
-    try {
-        
-        res.json({"msg" : "List order"})
-    } catch (error) {
-        next(error);
-    }
-} );
+router.patch("/:id/status", secure(["admin"]), async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    req.body.approvedBy = req.currentUser;
+    const result = await orderController.changeStatus(id, req.body);
+    res.json({ msg: `Change status of one Order by ${id}`, data: result });
+  } catch (e) {
+    next(e);
+  }
+});
 
-//List one order
-router.get("/:id" ,(req , res , next)=>{
-    try {
-        const { id }  = req.params.id ;
-        res.json({"msg" : "Get one order"})
-    } catch (error) {
-        next(error);
-    }
-} );
+router.put("/:id", secure(["admin"]), async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const result = await orderController.updateById(id, req.body);
+    res.json({ msg: `updated one Order by ${id}`, data: result });
+  } catch (e) {
+    next(e);
+  }
+});
 
-//Delete
-router.delete("/:id" ,(req , res , next)=>{
-    try {
-        const { id }  = req.params.id ;
-        res.json({"msg" : `Delete  order no ${id} `})
-    } catch (error) {
-        next(error);
-    }
-} );
-
-//Change  status data
-router.patch("/:id/status" ,(req , res , next)=>{
-    try {
-        const { id }  = req.params.id ;
-        
-
-        res.json({"msg" :  `Change  status of  one order by ${id} `})
-    } catch (error) {
-        next(error);
-    }
-} );
-
-//Update
-router.put("/:id" ,(req , res , next)=>{
-    try {
-        const { id }  = req.params.id ;
-        
-
-        res.json({"msg" :  `Update one  order by ${id} `})
-    } catch (error) {
-        next(error);
-    }
-} );
-
-module.exports =  router;
+module.exports = router;

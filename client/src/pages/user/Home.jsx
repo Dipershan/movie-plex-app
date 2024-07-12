@@ -6,13 +6,13 @@ import { Link } from "react-router-dom";
 import { IoIosBasket } from "react-icons/io";
 
 import { useDispatch, useSelector } from "react-redux";
-import { add, getCount } from "../../slices/cartSlice";
+import { add } from "../../slices/cartSlice";
 
 import { useMovies } from "../../hooks/useMovies";
 
 
 
-import "./Home.css";
+
 
 const Home = () => {
 
@@ -125,7 +125,7 @@ const Home = () => {
                                     )[0]?.quantity
                                   })`
                                 : `(0)`}
-                        {dispatch(getCount(movie))}
+                        {/* {dispatch(getCount(movie))} */}
                         </button>
                         <Link to={`/movies/${movie?.slug}` }>
                         <button type="button" className="btn btn-sm btn-outline-danger">

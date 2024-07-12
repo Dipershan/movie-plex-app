@@ -20,6 +20,7 @@ import Home from "./pages/user/Home";
 import Cart from "./pages/user/Cart";
 import MovieDetail from "./pages/user/MovieDetail";
 import Order from "./pages/user/Order";
+import Checkout from "./pages/user/Checkout";
 
 const App =() =>{
   return( 
@@ -41,6 +42,10 @@ const App =() =>{
       <Route path="order" element={<Order />} />
       </Route>
 
+      {/* User Routers for checkout (login) */}
+      <Route path="/" element={<UserLayout />} >
+      <Route path="checkout" element={<Checkout />}/>
+      </Route>
       {/* Admin Routes */}
       
       <Route path="/admin" element={<AdminLayout />}>

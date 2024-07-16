@@ -1,7 +1,6 @@
-
-import { Link } from 'react-router-dom'
-import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { Image } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { IoIosBasket, IoIosTrash } from "react-icons/io";
 import { MdOutlineShoppingCartCheckout } from "react-icons/md";
 import {
@@ -12,7 +11,6 @@ import {
 } from "../../slices/cartSlice";
 
 const Cart = () => {
-
   const dispatch = useDispatch();
 
   const { cart } = useSelector((state) => state.cart);
@@ -36,13 +34,12 @@ const Cart = () => {
       )}
     </div>
   );
-  
-}
+};
 
-const EmptyCart =()=>{
+const EmptyCart = () => {
   return (
-  <>
-   <div className="m-4 bg-body-tertiary rounded-3 text-center">
+    <>
+      <div className="m-4 bg-body-tertiary rounded-3 text-center">
         <div className="container-fluid py-5">
           <h1 className="display-5 fw-bold">Your cart is empty</h1>
           <Link to="/" className="btn btn-secondary btn-lg">
@@ -50,11 +47,11 @@ const EmptyCart =()=>{
           </Link>
         </div>
       </div>
-  </>)
-}
+    </>
+  );
+};
 
-
-export const FullCart = ({ items, decrease, increase, remove, dispatch, total }) => {
+const FullCart = ({ items, decrease, increase, remove, dispatch, total }) => {
   return (
     <>
       <h1 className="text-center m-5">Your Cart</h1>
@@ -74,9 +71,9 @@ export const FullCart = ({ items, decrease, increase, remove, dispatch, total })
                 <th>Name</th>
                 <th>Image</th>
                 <th>Price</th>
-                <th>Av Quantity</th>
+                <th>Avail Quantity</th>
                 <th>Quantity</th>
-                <th>Total </th>
+                <th>Total Price</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -145,6 +142,5 @@ export const FullCart = ({ items, decrease, increase, remove, dispatch, total })
     </>
   );
 };
-
 
 export default Cart;

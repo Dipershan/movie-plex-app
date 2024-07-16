@@ -49,10 +49,11 @@ const login = async (payload) => {
   const tokenPayload = {
     name: user?.name,
     email: user?.email,
+    roles: user?.roles,
   };
   const token = generateToken(tokenPayload);
   if (!token) throw new Error("Something went wrong");
-  return token;
+  return {token  , name: user?.name ,  email: user?.email ,id: user?._id};
 };
 
 const getById = (id) => {

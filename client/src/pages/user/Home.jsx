@@ -10,6 +10,7 @@ import { add } from "../../slices/cartSlice";
 
 import { useMovies } from "../../hooks/useMovies";
 
+import Paginate from "../../components/Paginate";
 
 
 
@@ -143,13 +144,19 @@ const Home = () => {
            })
           ) :(
           <>No movies</>
-        )
-      
-      }
-
-
+        )}
+    </div>
     
-      </div>
+    {data?.data?.total && (
+            <Paginate
+              total={data?.data?.total}
+              limit={limit}
+              currentPage={page}
+              setCurrentPage={setPage}
+              setLimit={setLimit}
+            />
+    )}
+    
     </div>
   </div>
    </>

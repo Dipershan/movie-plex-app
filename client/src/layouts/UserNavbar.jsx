@@ -11,8 +11,11 @@ import {Button ,
    import { BiCartDownload } from "react-icons/bi";
    import Logo from "../assets/logo.png"
    import { Link } from 'react-router-dom';
+   import { useSelector } from "react-redux";
 
 const UserNavbar = () => {
+  const { quantity } = useSelector((state) => state.cart);
+
   return (
     <Navbar expand="lg" className="bg-body-tertiary" bg="dark" data-bs-theme="dark">
     <Container fluid>
@@ -35,7 +38,7 @@ const UserNavbar = () => {
           <Link className='nav-link' to="/cart">
           <span className="badge d-flex align-items-center p-1 pe-2 text-secondary-emphasis bg-secondary-subtle border border-secondary-subtle rounded-pill">
            <BiCartDownload size="1.5rem" color='gold'/>
-              &nbsp;0
+           &nbsp;{quantity}
            </span>
            </Link>
           </ButtonGroup>

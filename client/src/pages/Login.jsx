@@ -1,13 +1,15 @@
-import { Link, useNavigate } from 'react-router-dom';
-import Logo from "../assets/logo.png";
-import { useEffect, useState } from 'react';
-import { instance } from '../utils/axios';
-import { setToken } from '../utils/storage';
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-import { Notify } from '../components/Notify';
+import { instance } from "../utils/axios";
+import { setToken, setCurrentUser } from "../utils/storage";
+
+import Logo from "../assets/logo.png";
+
+import { Notify } from "../components/Notify";
 
 const Login = () => {
-  const navigate =  useNavigate();
+  const navigate = useNavigate();
   const [payload, setPayload] = useState({
     email: "",
     password: "",
@@ -15,30 +17,26 @@ const Login = () => {
   const [msg, setMsg] = useState("");
   const [error, setError] = useState("");
 
-  const handleImageError = (e) => {
+  const handleImageErr = (e) => {
     e.target.src = "https://pixlr.com/images/index/ai-image-generator-one.webp";
   };
 
   const handleLogin = async (e) => {
-    
     try {
       e.preventDefault();
       const { data } = await instance.post("/users/login", payload);
-      const { data: userInfo , msg } = data;
+      const { data: userInfo, msg } = data;
       setMsg(msg);
       setToken("access_token", userInfo?.token);
-      setToken ("currentUser",{
-        name: userInfo?.name,
-        email: userInfo?.email,
-        id: userInfo?.id,
-      });
-      if(localStorage.getItem("redirectUrl")){
+      setCurrentUser(userInfo?.id);
+      if (localStorage.getItem("redirectUrl")) {
         navigate(localStorage.getItem("redirectUrl"));
-      }else{
-        navigate("admin");
+      } else {
+        navigate("/admin");
       }
     } catch (err) {
-      const errMsg = err?.response?.data?.msg || 'Something went wrong.Try again!';
+      const errMsg =
+        err?.response?.data?.msg || "Something went wrong. Try again!";
       setError(errMsg);
     } finally {
       setTimeout(() => {
@@ -48,63 +46,79 @@ const Login = () => {
     }
   };
 
-  useEffect(()=>{
-    const token =  localStorage.getItem("access_token");
-    console.log(token);
-    if(token){
-      navigate("/admin" , {replace:true});
+  useEffect(() => {
+    const token = localStorage.getItem("access_token");
+    if (token) {
+      navigate("/admin", { replace: true });
     }
-  },[navigate]);
-  
+  }, [navigate]);
   return (
-    <div className="flex d-flex justify-content-center align-items-center vh-100">
-      <div className="card shadow-lg mb-5" style={{ width: "450px" }}>
-        <div className="card-body">
-          <div className="text-center">
-            <img src={Logo} alt="Movie Logo" onError={handleImageError} width="200px" />
+    <div>
+      <div className="flex d-flex justify-content-center align-items-center vh-100">
+        <div className="card shadow-lg mb-5" style={{ width: "450px" }}>
+          <div className="card-body">
+            <div className="text-center">
+              <img
+                src={Logo}
+                className="img-fluid"
+                alt="Movie Mate logo"
+                onError={(e) => handleImageErr(e)}
+                width="200px"
+              />
+            </div>
+            <h1 className="text-center">Login</h1>
+            {error && <Notify message={error} />}
+            {msg && <Notify variant="success" message={msg} />}
+            <form onSubmit={(e) => handleLogin(e)}>
+              <div className="mb-3">
+                <label className="form-label">Email address</label>
+                <input
+                  type="email"
+                  className="form-control"
+                  required
+                  onChange={(e) =>
+                    setPayload((prev) => {
+                      return { ...prev, email: e.target.value };
+                    })
+                  }
+                />
+              </div>
+              <div className="mb-3">
+                <label className="form-label">Password</label>
+                <input
+                  type="password"
+                  className="form-control"
+                  required
+                  onChange={(e) =>
+                    setPayload((prev) => {
+                      return { ...prev, password: e.target.value };
+                    })
+                  }
+                />
+                <Link
+                  className="flex d-flex flex-row-reverse"
+                  to="/forget-password"
+                  style={{ textDecoration: "none", cursor: "pointer" }}
+                >
+                  Forget Password?
+                </Link>
+              </div>
+
+              <button type="submit" className="btn btn-primary">
+                Submit
+              </button>
+            </form>
           </div>
-          <h1 className="text-center">LOGIN</h1>
-          {error && <Notify message={error} />}
-          {msg && <Notify variant="success" message={msg} />}
-          <form onSubmit={handleLogin}>
-            <div className="mb-3">
-              <label className="form-label">Email address</label>
-              <input
-                type="email"
-                required
-                className="form-control"
-                onChange={(e) => setPayload((prev) => ({ ...prev, email: e.target.value }))}
-              />
-              <div id="emailHelp" className="form-text">We will never share your email with anyone else.</div>
-            </div>
-            <div className="mb-3">
-              <label className="form-label">Password</label>
-              <input
-                type="password"
-                required
-                className="form-control"
-                onChange={(e) => setPayload((prev) => ({ ...prev, password: e.target.value }))}
-              />
-            </div>
+          <hr />
+          <div className="text-center mb-2">
             <Link
-              className="flex d-flex flex-row-reverse"
-              to="/forget-password"
+              className="flex"
               style={{ textDecoration: "none", cursor: "pointer" }}
+              to="/register"
             >
-              Forgot password?
+              Register
             </Link>
-            <button type="submit" className="btn btn-primary">Submit</button>
-          </form>
-        </div>
-        <hr />
-        <div className="text-center">
-          <Link
-            className="flex"
-            style={{ textDecoration: "none", cursor: "pointer" }}
-            to="/register"
-          >
-            Register
-          </Link>
+          </div>
         </div>
       </div>
     </div>

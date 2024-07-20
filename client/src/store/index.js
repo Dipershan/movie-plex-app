@@ -15,6 +15,7 @@ import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
 import { cartReducer } from "../slices/cartSlice";
 import { orderReducer } from "../slices/orderSlice";
 import { movieReducer } from "../slices/movieSlice";
+// import { userReducer } from "../slices/userSlice";
 
 const persistConfig = {
   key: "mm-cart",
@@ -29,6 +30,7 @@ export const store = configureStore({
     cart: persistCart,
     movies: movieReducer,
     orders: orderReducer,
+    // users: userReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

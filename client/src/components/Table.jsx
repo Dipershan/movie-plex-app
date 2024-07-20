@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { BsPencilSquare } from "react-icons/bs";
 
 const CTable = ({ header = [], data = [], edit }) => {
+  console.log(data);
   return (
     <Table striped bordered hover>
       <thead>

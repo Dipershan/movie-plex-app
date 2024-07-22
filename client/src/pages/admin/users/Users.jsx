@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useCallback, useEffect } from "react";
 import { Card } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 
 
 import {
@@ -9,29 +9,22 @@ import {
   setLimit,
 } from "../../../slices/userSlice";
 
-import CTable from "../../../components/Table";
 import Paginate from "../../../components/Paginate";
+import CTable from "../../../components/Table";
 
-const users = () => {
+const Users = () => {
   const dispatch = useDispatch();
   const { total, currentPage, users, limit } = useSelector(
     (state) => state.users
   );
 
+  console.log("users" ,  users);
  
 
   const extractHeader = (data) => {
     if (data.length === 0) return [];
     const {
-      slug,
-   
-      createdAt,
-      id,
-      products,
-      updatedAt,
-      __v,
-      _id,
-      ...rest
+        createdAt, id, updatedAt, __v, _id, ...rest
     } = data[0];
     return Object.keys(rest);
   };
@@ -63,7 +56,7 @@ const users = () => {
           </div>
         </Card.Header>
         <Card.Body>
-          {users.length > 0 && (
+          {users && (
             <>
               <CTable
                 header={extractHeader(users)}
@@ -86,4 +79,4 @@ const users = () => {
   );
 };
 
-export default users;
+export default Users;

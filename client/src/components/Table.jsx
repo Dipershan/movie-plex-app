@@ -22,7 +22,7 @@ const CTable = ({ header = [], data = [], edit }) => {
             return (
               <tr key={index}>
                 {header.map((key, index) => {
-                  return <td key={index}>{item[key]}</td>;
+                  return <td key={index}>{ typeof item[key] === 'boolean' ? (item[key] ? 'True' : 'False') : item[key] }</td>;
                 })}
                 <td>
                   {edit && (

@@ -27,7 +27,7 @@ import Movies from "./pages/admin/movies/Movies";
 import Movie from "./pages/admin/movies/Movie";
 import Profile from "./pages/admin/users/Profile";
 // import User from "./pages/admin/users/User";
-// import Users from "./pages/admin/users/Users";
+import Users from "./pages/admin/users/Users";
 
 const App = () => {
   return (
@@ -76,16 +76,16 @@ const App = () => {
               <PrivateRoute component={<Movie />} sysRoles={["admin"]} />
             }
           />
-          {/* <Route
+           <Route
             path="users"
             element={
               <PrivateRoute component={<Users />} sysRoles={["admin"]} />
             }
           />
-          <Route
+          {/* <Route
             path="users/:id"
             element={<PrivateRoute component={<User />} sysRoles={["admin"]} />}
-          /> */}
+          />  */}
           <Route
             path="profile"
             element={<PrivateRoute component={<Profile />} />}

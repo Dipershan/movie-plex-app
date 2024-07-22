@@ -4,6 +4,7 @@ const userModel = require("../modules/users/user.model");
 const secure = (sysRole = []) => {
   return async (req, res, next) => {
     try {
+      console.log(req.headers);  
       const { access_token } = req.headers;
       // what to do if no token
       if (!access_token) throw new Error("Token is missing");

@@ -52,6 +52,49 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
+
+router.get("/profile", async (req, res) => {
+  try {
+    const user = await getProfile(req.user._id);
+    if (user) {
+      res.json({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+ 
+      });
+    } else {
+      res.status(404);
+      throw new Error('User not found');
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+
+// Update user profile
+router.put('/profile',  async (req, res) => {
+  try {
+    const updatedUser = await updateById(req.user._id, req.body);
+    if (updatedUser) {
+      res.json({
+        _id: updatedUser._id,
+        name: updatedUser.name,        
+        email: updatedUser.email,
+        
+      });
+    } else {
+      res.status(404);
+      throw new Error('User not found');
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+
+
 router.post("/generate-email-token", async (req, res, next) => {
   try {
     const result = await userController.generateEmailToken(req.body);

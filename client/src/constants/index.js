@@ -6,4 +6,5 @@ export const APIs = {
   MOVIES: API_URL + "/movies",
   USERS: API_URL + "/users",
   ORDERS: API_URL + "/orders",
+  
 };

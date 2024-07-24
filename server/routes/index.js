@@ -4,6 +4,7 @@ const router = express.Router();
 const movieRouter = require("../modules/movies/movie.api");
 const orderRouter = require("../modules/orders/order.api");
 const userRouter = require("../modules/users/user.api");
+const profileRoutes = require('../modules/users/user.api');
 
 router.get("/api/v1", async (req, res, next) => {
   try {
@@ -16,5 +17,6 @@ router.get("/api/v1", async (req, res, next) => {
 router.use("/api/v1/movies", movieRouter);
 router.use("/api/v1/orders", orderRouter);
 router.use("/api/v1/users", userRouter);
+router.use('/api/v1/profile', profileRoutes);
 
 module.exports = router;

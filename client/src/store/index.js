@@ -16,8 +16,8 @@ import { cartReducer } from "../slices/cartSlice";
 import { orderReducer } from "../slices/orderSlice";
 import { movieReducer } from "../slices/movieSlice";
  import { userReducer } from "../slices/userSlice";
- import { profileReducer } from "../slices/profileSlice";
-
+import  {profileReducer}  from "../slices/profileSlice";
+ 
 
 const persistConfig = {
   key: "mm-cart",
@@ -34,6 +34,7 @@ export const store = configureStore({
     orders: orderReducer,
     users: userReducer,
     profile: profileReducer,
+    
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

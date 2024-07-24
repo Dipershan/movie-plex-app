@@ -9,6 +9,7 @@ const initialState = {
   currentPage: 1,
   error: "",
   loading: false,
+
 };
 
 export const createUser = createAsyncThunk(
@@ -16,6 +17,18 @@ export const createUser = createAsyncThunk(
   async (payload) => {
     const res = await UserServices.create(payload);
     return res?.data;
+  }
+);
+
+export const deleteUser = createAsyncThunk(
+  "users/deleteUser",
+  async (id, { rejectWithValue }) => {
+    try {
+      await UserServices.delete(id);
+      return id; // Return the ID of the deleted user
+    } catch (error) {
+      return rejectWithValue(error.message); // Return the error message
+    }
   }
 );
 
@@ -98,6 +111,18 @@ const userSlice = createSlice({
       .addCase(updateUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
+      
+      })
+      .addCase(deleteUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.users = state.users.filter(user => user.id !== action.payload);
+      })
+      .addCase(deleteUser.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(deleteUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload || action.error.message; // Use action.payload for specific error messages
       });
   }, // API Calls
 });

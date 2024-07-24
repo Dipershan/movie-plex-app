@@ -1,16 +1,9 @@
 import { useCallback, useEffect } from "react";
 import { Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-
-
-import {
-  listUser,
-  setCurrentPage,
-  setLimit,
-} from "../../../slices/userSlice";
-
+import { listUser, setCurrentPage, setLimit, deleteUser } from "../../../slices/userSlice";
 import Paginate from "../../../components/Paginate";
-import CTable from "../../../components/Table";
+import Tables from "../../../components/Tables";
 
 const Users = () => {
   const dispatch = useDispatch();
@@ -18,14 +11,9 @@ const Users = () => {
     (state) => state.users
   );
 
-  console.log("users" ,  users);
- 
-
   const extractHeader = (data) => {
     if (data.length === 0) return [];
-    const {
-        createdAt, id, updatedAt, __v, _id, ...rest
-    } = data[0];
+    const { createdAt, id, updatedAt, __v, _id, ...rest } = data[0];
     return Object.keys(rest);
   };
 
@@ -36,6 +24,11 @@ const Users = () => {
   const updateLimit = (number) => {
     dispatch(setLimit(number));
   };
+
+  const deleteUserHandler = (userId) => {
+    dispatch(deleteUser(userId));
+  };
+
   const updateCP = (number) => {
     dispatch(setCurrentPage(number));
   };
@@ -43,8 +36,6 @@ const Users = () => {
   useEffect(() => {
     initFetch();
   }, [initFetch]);
-
-
 
   return (
     <div className="mt-4">
@@ -58,10 +49,11 @@ const Users = () => {
         <Card.Body>
           {users && (
             <>
-              <CTable
+              <Tables
                 header={extractHeader(users)}
                 data={users}
                 edit="/admin/users"
+                onDelete={deleteUserHandler} // Pass the delete handler
               />
 
               <Paginate

@@ -19,6 +19,18 @@ const list = (limit, page) => {
     );
   };
 
+  
+  const deleteUser = (id) => {
+    return instance.delete(`${APIs.USERS}/${id}`, {
+      headers: {
+        access_token: getToken("access_token"),
+        "Content-Type": "application/json", // Use application/json for DELETE requests
+      },
+    });
+  };
+  
+  
+
   // const getById = (slug) => {
   //   return instance.get(`${APIs.USERS}/${slug}`, {
   //     headers: {
@@ -50,6 +62,7 @@ const update = (id, payload) => {
 const UserServices = {
     create ,
     list,
+    deleteUser,
     // changeStatus,
      update,
     //  getById

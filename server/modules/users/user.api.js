@@ -53,46 +53,6 @@ router.post("/login", async (req, res, next) => {
 });
 
 
-router.get("/profile", async (req, res) => {
-  try {
-    const user = await getProfile(req.user._id);
-    if (user) {
-      res.json({
-        _id: user._id,
-        name: user.name,
-        email: user.email,
- 
-      });
-    } else {
-      res.status(404);
-      throw new Error('User not found');
-    }
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
-
-
-// Update user profile
-router.put('/profile',  async (req, res) => {
-  try {
-    const updatedUser = await updateById(req.user._id, req.body);
-    if (updatedUser) {
-      res.json({
-        _id: updatedUser._id,
-        name: updatedUser.name,        
-        email: updatedUser.email,
-        
-      });
-    } else {
-      res.status(404);
-      throw new Error('User not found');
-    }
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
-
 
 
 router.post("/generate-email-token", async (req, res, next) => {
@@ -144,21 +104,22 @@ router.delete("/:id", secure(["admin"]), async (req, res, next) => {
   }
 });
 
-router.get("/profile", secure(), async (req, res, next) => {
+
+// Get user profile
+router.get('/profile', secure(), async (req, res, next) => {
   try {
     const result = await userController.getProfile(req.currentUser);
-    res.json({ msg: "User Profile generated", data: result });
+    res.json({ msg: 'User Profile generated', data: result });
   } catch (e) {
     next(e);
   }
 });
 
-// Day 3
-
-router.put("/profile", secure(), async (req, res, next) => {
+// Update user profile
+router.put('/profile', secure(), async (req, res, next) => {
   try {
     const result = await userController.updateById(req.currentUser, req.body);
-    res.json({ msg: "User Profile Updated successfully", data: result });
+    res.json({ msg: 'User Profile Updated successfully', data: result });
   } catch (e) {
     next(e);
   }

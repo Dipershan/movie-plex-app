@@ -12,13 +12,16 @@ export const getProfile = createAsyncThunk("profile/getProfile", async () => {
   return res?.data;
 });
 
+
 export const updateProfile = createAsyncThunk(
   "profile/updateProfile",
-  async (payload) => {
-    const res = await ProfileServices.updateProfile(payload);
+  async ({ id, payload }) => {
+    const res = await ProfileServices.update(id, payload);
     return res?.data;
   }
 );
+
+
 
 const profileSlice = createSlice({
   name: 'profile',

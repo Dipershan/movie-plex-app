@@ -1,5 +1,5 @@
 import { createSlice  ,  createAsyncThunk } from "@reduxjs/toolkit";
-import UserServices from "../services/user";
+import UserServices from "../services/users";
 
 const initialState = {
   users: [],
@@ -20,17 +20,17 @@ export const createUser = createAsyncThunk(
   }
 );
 
-export const deleteUser = createAsyncThunk(
-  "users/deleteUser",
-  async (id, { rejectWithValue }) => {
-    try {
-      await UserServices.delete(id);
-      return id; // Return the ID of the deleted user
-    } catch (error) {
-      return rejectWithValue(error.message); // Return the error message
-    }
-  }
-);
+// export const deleteUser = createAsyncThunk(
+//   "users/deleteUser",
+//   async (id, { rejectWithValue }) => {
+//     try {
+//       await UserServices.delete(id);
+//       return id; // Return the ID of the deleted user
+//     } catch (error) {
+//       return rejectWithValue(error.message); // Return the error message
+//     }
+//   }
+// );
 
 export const listUser = createAsyncThunk(
   "users/listUser",
@@ -41,7 +41,7 @@ export const listUser = createAsyncThunk(
 );
 
 export const getUser = createAsyncThunk("users/getUser", async (id) => {
-  const res = await UserServices.getBySlug(id);
+  const res = await UserServices.getById(id);
   return res?.data;
 });
 
@@ -92,7 +92,7 @@ const userSlice = createSlice({
       })
       .addCase(getUser.fulfilled, (state, action) => {
         state.loading = false;
-        state.movie = action.payload.data;
+        state.user = action.payload.data;
       })
       .addCase(getUser.pending, (state) => {
         state.loading = true;
@@ -103,27 +103,26 @@ const userSlice = createSlice({
       })
       .addCase(updateUser.fulfilled, (state, action) => {
         state.loading = false;
-        state.movie = action.payload.data;
+        state.user = action.payload;
       })
       .addCase(updateUser.pending, (state) => {
         state.loading = true;
       })
       .addCase(updateUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
-      
-      })
-      .addCase(deleteUser.fulfilled, (state, action) => {
-        state.loading = false;
-        state.users = state.users.filter(user => user.id !== action.payload);
-      })
-      .addCase(deleteUser.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(deleteUser.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload || action.error.message; // Use action.payload for specific error messages
+        state.error = action.payload || action.error.message;
       });
+      // .addCase(deleteUser.fulfilled, (state, action) => {
+      //   state.loading = false;
+      //   state.users = state.users.filter(user => user.id !== action.payload);
+      // })
+      // .addCase(deleteUser.pending, (state) => {
+      //   state.loading = true;
+      // })
+      // .addCase(deleteUser.rejected, (state, action) => {
+      //   state.loading = false;
+      //   state.error = action.payload || action.error.message; // Use action.payload for specific error messages
+      // });
   }, // API Calls
 });
 

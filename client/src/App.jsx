@@ -26,7 +26,6 @@ import Order from "./pages/admin/orders/Order";
 import Movies from "./pages/admin/movies/Movies";
 import Movie from "./pages/admin/movies/Movie";
 import Profile from "./pages/admin/users/Profile";
-import EditPro from "./pages/admin/users/EditPro";
 import User from "./pages/admin/users/User";
 import Users from "./pages/admin/users/Users";
 
@@ -89,15 +88,11 @@ const App = () => {
             element={<PrivateRoute component={<User />} sysRoles={["admin"]} />}
           /> 
           <Route
-            path="profile"
+            path="profile/"
             element={<PrivateRoute component={<Profile />} />}
           />
-          <Route
-            path="editpro"
-            element={<PrivateRoute component={<EditPro />} />}
-          />
         </Route>
-        <Route path="*" element={<ErrorPage />}></Route>
+        <Route path="*" element={<ErrorPage />} sysRoles={["admin"]}></Route>
       </Routes>
     </>
   );

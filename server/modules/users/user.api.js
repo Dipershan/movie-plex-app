@@ -52,9 +52,6 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
-
-
-
 router.post("/generate-email-token", async (req, res, next) => {
   try {
     const result = await userController.generateEmailToken(req.body);
@@ -104,7 +101,6 @@ router.delete("/:id", secure(["admin"]), async (req, res, next) => {
   }
 });
 
-
 // Get user profile
 router.get('/profile', secure(), async (req, res, next) => {
   try {
@@ -129,6 +125,16 @@ router.get("/:id", secure(["admin"]), async (req, res, next) => {
   try {
     const result = await userController.getById(req.params.id);
     res.json({ msg: "User detail generated", data: result });
+  } catch (e) {
+    next(e);
+  }
+});
+
+
+router.put("/:id", secure(["admin"]), async (req, res, next) => {
+  try {
+    const result = await userController.updateById(req.params.id, req.body);
+    res.json({ msg: "User Updated Successfully", data: result });
   } catch (e) {
     next(e);
   }

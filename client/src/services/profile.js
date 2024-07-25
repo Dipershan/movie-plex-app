@@ -12,15 +12,16 @@ const getProfile = () => {
   });
 };
 
-const updateProfile = (payload) => {
-  const url = APIs.PROFILE;
-  console.log('Updating profile at:', url, 'with payload:', payload);
-  return instance.put(url, payload, {
+
+
+const updateProfile = (id, payload) => {
+  return instance.put(`${APIs.PROFILE}/${id}`, payload, {
     headers: {
-      access_token: getToken('access_token'),
+      access_token: getToken("access_token"),
     },
   });
 };
+
 
 const ProfileServices = {
   getProfile,

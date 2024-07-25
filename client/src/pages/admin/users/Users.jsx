@@ -1,9 +1,11 @@
 import { useCallback, useEffect } from "react";
 import { Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { listUser, setCurrentPage, setLimit, deleteUser } from "../../../slices/userSlice";
+import { listUser, setCurrentPage, setLimit
+  // , deleteUser 
+} from "../../../slices/userSlice";
 import Paginate from "../../../components/Paginate";
-import Tables from "../../../components/Tables";
+import CTable from "../../../components/Table";
 
 const Users = () => {
   const dispatch = useDispatch();
@@ -25,9 +27,9 @@ const Users = () => {
     dispatch(setLimit(number));
   };
 
-  const deleteUserHandler = (userId) => {
-    dispatch(deleteUser(userId));
-  };
+  // const deleteUserHandler = (userId) => {
+  //   dispatch(deleteUser(userId));
+  // };
 
   const updateCP = (number) => {
     dispatch(setCurrentPage(number));
@@ -49,11 +51,11 @@ const Users = () => {
         <Card.Body>
           {users && (
             <>
-              <Tables
+              <CTable
                 header={extractHeader(users)}
                 data={users}
                 edit="/admin/users"
-                onDelete={deleteUserHandler} // Pass the delete handler
+               
               />
 
               <Paginate

@@ -1,38 +1,75 @@
-import  { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import { getUser, updateUser } from '../../../slices/userSlice';
 import './Profile.css';
 
 const Profile = () => {
   const dispatch = useDispatch();
-  const { profile, error, status } = useSelector((state) => state.profile);
+  const { pathname } = useLocation();
+  const userId = pathname.split("/")[3]; 
+
+  const { user, status, error } = useSelector((state) => state.users);
+
+  const [payload, setPayload] = useState({
+    name: '',
+    email: '',
+  });
+  const [loading, setLoading] = useState(false);
+  const [updateError, setUpdateError] = useState('');
+  const [success, setSuccess] = useState('');
   const [isEditing, setIsEditing] = useState(false);
-  const [editableProfile, setEditableProfile] = useState({});
+  
+
 
   useEffect(() => {
-    dispatch(getUser());
-  }, [dispatch]);
+    if (userId) {
+      dispatch(getUser(userId));
+    } else {
+      const authUser = JSON.parse(localStorage.getItem("currentUser"));
+      dispatch(getUser(authUser.id));
+    }
+  }, [dispatch, userId]);
 
   useEffect(() => {
-    setEditableProfile(profile);
-  }, [profile]);
+    if (user) {
+      setPayload({
+        name: user.name || '',
+        email: user.email || '',
+      });
+    }
+  }, [user]);
 
   const handleEditClick = () => {
     setIsEditing(true);
   };
 
-  const handleSaveClick = async () => {
+  const handleSaveClick = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setUpdateError('');
     try {
-      await dispatch(updateUser(editableProfile));
-      setIsEditing(false);
-    } catch (error) {
-      console.error('Error updating profile', error);
+      const authUser = JSON.parse(localStorage.getItem("currentUser"));
+
+      const userId = authUser.id
+      await dispatch(updateUser({ id: userId, payload })).unwrap();
+      setSuccess('Profile updated successfully!');
+      dispatch(getUser(authUser.id));
+      setIsEditing(false)
+      
+    } catch (err) {
+      setUpdateError('Failed to update profile. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setEditableProfile({ ...editableProfile, [name]: value });
+    setPayload((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   if (status === 'loading') {
@@ -65,7 +102,7 @@ const Profile = () => {
               <title>Placeholder</title>
               <rect width="100%" height="100%" fill="var(--bs-secondary-color)" />
             </svg>
-            <h2>{profile.name || 'N/A'}</h2>
+            <h2>{payload.name || 'N/A'}</h2>
             <button className="btn btn-primary mt-3" onClick={handleEditClick}>
               Edit Profile
             </button>
@@ -74,15 +111,18 @@ const Profile = () => {
         <div className="col-md-9">
           <div className="border rounded overflow-hidden shadow-sm p-4">
             <h3>Information</h3>
+            {updateError && <div className="alert alert-danger">{updateError}</div>}
+            {success && <div className="alert alert-success">{success}</div>}
             {isEditing ? (
-              <>
+              <form onSubmit={handleSaveClick}>
                 <div className="mb-2">
                   <p>Name:</p>
                   <input
                     className="form-control"
                     name="name"
-                    value={editableProfile.name || ''}
+                    value={payload.name}
                     onChange={handleChange}
+                    required
                   />
                 </div>
                 <div className="mb-2">
@@ -91,24 +131,23 @@ const Profile = () => {
                     className="form-control"
                     name="email"
                     type="email"
-                    placeholder="you@example.com"
-                    value={editableProfile.email || ''}
+                    value={payload.email}
                     onChange={handleChange}
                   />
                 </div>
-                <button className="btn btn-success" onClick={handleSaveClick}>
-                  Save Changes
+                <button className="btn btn-success" type="submit" disabled={loading}>
+                  {loading ? 'Saving...' : 'Save'}
                 </button>
-              </>
+              </form>
             ) : (
               <>
-                <p>Name: {profile.name || 'N/A'}</p>
-                <p>Email: {profile.email || 'N/A'}</p>
-                <p>Roles: {profile.roles ? profile.roles.join(', ') : 'N/A'}</p>
-                <p>Email Verified: {profile.isEmailVerified ? 'Yes' : 'No'}</p>
-                <p>Account Active: {profile.isActive ? 'Yes' : 'No'}</p>
-                <p>Created At: {formatDate(profile.createdAt)}</p>
-                <p>Updated At: {formatDate(profile.updatedAt)}</p>
+                <p>Name: {payload.name || 'N/A'}</p>
+                <p>Email: {payload.email || 'N/A'}</p>
+                <p>Roles: {user?.roles?.join(', ') || 'N/A'}</p>
+                <p>Email Verified: {user?.isEmailVerified ? 'Yes' : 'No'}</p>
+                <p>Account Active: {user?.isActive ? 'Yes' : 'No'}</p>
+                <p>Created At: {formatDate(user?.createdAt)}</p>
+                <p>Updated At: {formatDate(user?.updatedAt)}</p>
               </>
             )}
           </div>

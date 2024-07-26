@@ -9,7 +9,7 @@ const initialState = {
   currentPage: 1,
   error: "",
   loading: false,
-
+  adminUser: {},
 };
 
 export const createUser = createAsyncThunk(
@@ -40,6 +40,8 @@ export const listUser = createAsyncThunk(
   }
 );
 
+
+//normal user
 export const getUser = createAsyncThunk("users/getUser", async (id) => {
   const res = await UserServices.getById(id);
   return res?.data;
@@ -52,6 +54,9 @@ export const updateUser = createAsyncThunk(
     return res?.data;
   }
 );
+
+
+
 
 
 const userSlice = createSlice({
@@ -101,6 +106,7 @@ const userSlice = createSlice({
         state.loading = false;
         state.error = action.error.message;
       })
+      
       .addCase(updateUser.fulfilled, (state, action) => {
         state.loading = false;
         state.user = action.payload;
@@ -112,6 +118,8 @@ const userSlice = createSlice({
         state.loading = false;
         state.error = action.payload || action.error.message;
       });
+
+    
       // .addCase(deleteUser.fulfilled, (state, action) => {
       //   state.loading = false;
       //   state.users = state.users.filter(user => user.id !== action.payload);

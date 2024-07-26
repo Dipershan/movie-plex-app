@@ -3,7 +3,6 @@ const router = require("express").Router();
 const { secure } = require("../../utils/secure");
 
 const userController = require("./user.controller");
-
 const { validator } = require("./user.validator");
 
 const storage = multer.diskStorage({
@@ -20,11 +19,13 @@ const storage = multer.diskStorage({
         file.originalname.split(".")[1]
       )
     );
-  },
-  // How to limit the file size; 1MB limit??
+  }
 });
 
-const upload = multer({ storage: storage });
+const upload = multer({ 
+  storage: storage,
+  limits: { fileSize: 1 * 1024 * 1024 } // 1MB file size limit
+});
 
 router.post(
   "/register",
@@ -64,7 +65,7 @@ router.post("/generate-email-token", async (req, res, next) => {
 router.post("/verify-email-token", async (req, res, next) => {
   try {
     const result = await userController.verifyEmailToken(req.body);
-    res.json({ msg: "Email successfully verifed", data: result });
+    res.json({ msg: "Email successfully verified", data: result });
   } catch (e) {
     next(e);
   }
@@ -74,8 +75,6 @@ router.post("/verify-email-token", async (req, res, next) => {
 
 router.get("/", secure(["admin"]), async (req, res, next) => {
   try {
-
-
     const { page, limit, name, email } = req.query;
     const search = { name, email };
     const data = await userController.list({ page, limit, search });
@@ -104,11 +103,8 @@ router.delete("/:id", secure(["admin"]), async (req, res, next) => {
 });
 
 // Get user profile
-router.get('/profile', secure(), async (req, res, next) => {
+router.get('/profile', secure(["admin"]), async (req, res, next) => {
   try {
-
-    res.json({ msg: 'User Profile generated'  });
-
     const result = await userController.getProfile(req.currentUser);
     res.json({ msg: 'User Profile generated', data: result });
   } catch (e) {
@@ -117,7 +113,7 @@ router.get('/profile', secure(), async (req, res, next) => {
 });
 
 // Update user profile
-router.put('/profile', secure(), async (req, res, next) => {
+router.put('/profile', secure(["admin"]), async (req, res, next) => {
   try {
     const result = await userController.updateById(req.currentUser, req.body);
     res.json({ msg: 'User Profile Updated successfully', data: result });
@@ -134,7 +130,6 @@ router.get("/:id", secure(["admin"]), async (req, res, next) => {
     next(e);
   }
 });
-
 
 router.put("/:id", secure(["admin"]), async (req, res, next) => {
   try {

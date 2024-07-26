@@ -74,6 +74,8 @@ router.post("/verify-email-token", async (req, res, next) => {
 
 router.get("/", secure(["admin"]), async (req, res, next) => {
   try {
+
+
     const { page, limit, name, email } = req.query;
     const search = { name, email };
     const data = await userController.list({ page, limit, search });
@@ -104,6 +106,9 @@ router.delete("/:id", secure(["admin"]), async (req, res, next) => {
 // Get user profile
 router.get('/profile', secure(), async (req, res, next) => {
   try {
+
+    res.json({ msg: 'User Profile generated'  });
+
     const result = await userController.getProfile(req.currentUser);
     res.json({ msg: 'User Profile generated', data: result });
   } catch (e) {

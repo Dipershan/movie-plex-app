@@ -89,7 +89,7 @@ const App = () => {
           /> 
           <Route
             path="profile/"
-            element={<PrivateRoute component={<Profile />} />}
+            element={<PrivateRoute component={<Profile />} sysRoles={["admin"]} />}
           />
         </Route>
         <Route path="*" element={<ErrorPage />} sysRoles={["admin"]}></Route>

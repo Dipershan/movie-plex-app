@@ -89,19 +89,14 @@ const Profile = () => {
       <div className="row mb-2">
         <div className="col-md-3">
           <div className="border rounded overflow-hidden shadow-sm p-4 text-center">
-            <svg
+          
+            <img
               className="bd-placeholder-img rounded-circle mb-3"
               width="140"
               height="140"
-              xmlns="http://www.w3.org/2000/svg"
-              role="img"
-              aria-label="Placeholder"
-              preserveAspectRatio="xMidYMid slice"
-              focusable="false"
-            >
-              <title>Placeholder</title>
-              <rect width="100%" height="100%" fill="var(--bs-secondary-color)" />
-            </svg>
+              src="https://image.freepik.com/free-vector/businessman-profile-cartoon_18591-58479.jpg"
+              alt="Profile"
+            />
             <h2>{payload.name || 'N/A'}</h2>
             <button className="btn btn-primary mt-3" onClick={handleEditClick}>
               Edit Profile

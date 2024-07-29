@@ -27,9 +27,7 @@ const Users = () => {
     dispatch(setLimit(number));
   };
 
-  // const deleteUserHandler = (userId) => {
-  //   dispatch(deleteUser(userId));
-  // };
+
 
   const updateCP = (number) => {
     dispatch(setCurrentPage(number));

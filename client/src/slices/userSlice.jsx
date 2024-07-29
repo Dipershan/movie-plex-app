@@ -20,17 +20,7 @@ export const createUser = createAsyncThunk(
   }
 );
 
-// export const deleteUser = createAsyncThunk(
-//   "users/deleteUser",
-//   async (id, { rejectWithValue }) => {
-//     try {
-//       await UserServices.delete(id);
-//       return id; // Return the ID of the deleted user
-//     } catch (error) {
-//       return rejectWithValue(error.message); // Return the error message
-//     }
-//   }
-// );
+
 
 export const listUser = createAsyncThunk(
   "users/listUser",
@@ -120,17 +110,7 @@ const userSlice = createSlice({
       });
 
     
-      // .addCase(deleteUser.fulfilled, (state, action) => {
-      //   state.loading = false;
-      //   state.users = state.users.filter(user => user.id !== action.payload);
-      // })
-      // .addCase(deleteUser.pending, (state) => {
-      //   state.loading = true;
-      // })
-      // .addCase(deleteUser.rejected, (state, action) => {
-      //   state.loading = false;
-      //   state.error = action.payload || action.error.message; // Use action.payload for specific error messages
-      // });
+  
   }, // API Calls
 });
 

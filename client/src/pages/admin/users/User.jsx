@@ -14,23 +14,24 @@ const User = () => {
   const [payload, setPayload] = useState({
     name: user?.name || "",
     email: user?.email || "",
+    isActive: user?.isActive || true,
   });
-  const [loading, setLoading] = useState(false);
+  
   const [updateError, setUpdateError] = useState("");
   const [success, setSuccess] = useState("");
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    
     setUpdateError("");
     try {
       await dispatch(updateUser({ id: userId, payload })).unwrap();
       setSuccess("User updated successfully!");
-      setLoading(false);
+      
       navigate("/admin/users");
     } catch (err) {
       setUpdateError("Failed to update user. Please try again.");
-      setLoading(false);
+      
     }
   };
 
@@ -42,6 +43,7 @@ const User = () => {
     setPayload({
       name: user?.name || "",
       email: user?.email || "",
+      isActive: user?.isActive || true,
     });
   }, [user]);
 
@@ -104,13 +106,29 @@ const User = () => {
                   Please enter a valid email address.
                 </div>
               </div>
+              <div className="d-block my-3">
+                <select
+                  className="form-select"
+                  value={payload.isActive}
+                  onChange={(e) => {
+                    setPayload((prev) => ({
+                      ...prev,
+                      isActive: e.target.value === "true",
+                    }));
+                  }}
+                >
+                  <option value="true">Active</option>
+                  <option value="false">Inactive</option>
+                </select>
+              </div>
               <hr className="mb-4" />
               <button
                 className="btn btn-primary btn-lg btn-block"
                 type="submit"
-                disabled={loading}
+                
               >
-                {loading ? "Saving..." : "Save"}
+                
+                Save
               </button>
             </form>
           </div>

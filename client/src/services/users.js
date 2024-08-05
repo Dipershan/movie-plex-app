@@ -12,8 +12,7 @@ const create = (payload) => {
 };
 
 const list = (limit, page) => {
-  // const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-  // const isAdmin = currentUser?.roles.includes("admin") || false;
+  
   return instance.get(
     `${APIs.USERS}?limit=${limit}&page=${page}`,
     {
@@ -23,16 +22,6 @@ const list = (limit, page) => {
     }
   );
 };
-
-// Uncomment and use if needed
-// const deleteUser = (id) => {
-//   return instance.delete(`${APIs.USERS}/${id}`, {
-//     headers: {
-//       access_token: getToken("access_token"),
-//       "Content-Type": "application/json",
-//     },
-//   });
-// };
 
 const getById = (id) => {
   return instance.get(`${APIs.USERS}/${id}`, {

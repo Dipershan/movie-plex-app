@@ -28,15 +28,23 @@ export const listMovie = createAsyncThunk(
 );
 
 export const getMovie = createAsyncThunk("movies/getMovie", async (id) => {
-  const res = await MovieServices.getBySlug(id);
+  const res = await MovieServices.getById(id);
   return res?.data;
 });
 
 export const updateMovie = createAsyncThunk(
   "movies/updateMovie",
   async ({ id, payload }) => {
-    const res = await MovieServices.update(id, payload);
+    const res = await MovieServices.updateById(id, payload);
     return res?.data;
+  }
+);
+
+export const updateSeats = createAsyncThunk(
+  "movies/updateSeats",
+  async ({ id, seats }) => {
+    const res = await MovieServices.updateSeats(id, { seats });
+    return { id, seats: res?.data.seats };
   }
 );
 
@@ -55,7 +63,7 @@ const movieSlice = createSlice({
     builder
       .addCase(createMovie.fulfilled, (state, action) => {
         state.loading = false;
-        state.movies = action.payload;
+        state.movies.push(action.payload);
       })
       .addCase(createMovie.pending, (state) => {
         state.loading = true;
@@ -89,7 +97,12 @@ const movieSlice = createSlice({
       })
       .addCase(updateMovie.fulfilled, (state, action) => {
         state.loading = false;
-        state.movie = action.payload.data;
+        const index = state.movies.findIndex(movie => movie._id === action.payload._id);
+        if (index !== -1) {
+          state.movies[index] = action.payload;
+        } else {
+          state.movies.push(action.payload);
+        }
       })
       .addCase(updateMovie.pending, (state) => {
         state.loading = true;
@@ -97,10 +110,24 @@ const movieSlice = createSlice({
       .addCase(updateMovie.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
+      })
+      .addCase(updateSeats.fulfilled, (state, action) => {
+        state.loading = false;
+        const index = state.movies.findIndex(movie => movie.id === action.payload.id);
+        if (index !== -1) {
+          state.movies[index].seats = action.payload.seats;
+        }
+        state.movie.seats = action.payload.seats;
+      })
+      .addCase(updateSeats.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(updateSeats.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
       });
-  }, // API Calls
+  },
 });
 
 export const { setCurrentPage, setLimit } = movieSlice.actions;
-
 export const movieReducer = movieSlice.reducer;

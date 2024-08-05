@@ -12,6 +12,11 @@ const create = async (payload) => {
   return movieModel.create(payload);
 };
 
+const getById = (id) =>{
+  return movieModel.findById(id);
+}
+
+
 // movie list (list)
 const list = async ({ page = 1, limit = 10, search }) => {
   const query = [];
@@ -23,6 +28,9 @@ const list = async ({ page = 1, limit = 10, search }) => {
       },
     });
   }
+
+
+  
   // Sort
   query.push({
     $sort: {
@@ -71,8 +79,9 @@ const list = async ({ page = 1, limit = 10, search }) => {
   };
 };
 
-// get one movie (getById)
+// get one movie (getBySlug)
 const getBySlug = (slug) => {
+
   return movieModel.findOne({ slug });
 };
 
@@ -83,13 +92,16 @@ const updateReleaseDate = (slug, payload) => {
 };
 
 // update Movie Detail (update)
-const update = (slug, payload) => {
-  if (payload.title) {
-    payload.slug = slugger(payload?.title);
-  }
-  return movieModel.updateOne({ slug }, payload);
+const updateById = (id, payload) => {
+
+  return movieModel.findOneAndUpdate({ id }, payload);
 };
 
+
+
+// const updateById = (id, payload) => {
+//   return movieModel.findOneAndUpdate({ _id: id }, payload, { new: true });
+// };
 // update Seat Number (updateSeats)
 const updateSeats = async (slug, payload) => {
   const movie = await movieModel.findOne({ slug });
@@ -116,8 +128,9 @@ module.exports = {
   create,
   list,
   getBySlug,
-  updateReleaseDate,
-  update,
+  updateReleaseDate,  
   updateSeats,
+  updateById,
   remove,
+  getById
 };

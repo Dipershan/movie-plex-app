@@ -64,28 +64,11 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-// router.put(
-//   "/:id",
-//   secure(["admin"]),
-//   upload.single("poster"),
-//   async (req, res, next) => {
-//     try {
-//       const { id } = req.params;
-//       req.body.updatedBy = req.currentUser;
-//       const result = await movieController.updateById(id, req.body);
-//       res.json({ msg: `Update one movie by ${id}`, data: result });
-//     } catch (e) {
-//       next(e);
-//     }
-//   }
-// );
 
 router.put("/:id", secure(["admin"]), async (req, res, next) => {
   try {
     const { id } = req.params;
     const payload = req.body;
-    console.log("Updating movie with ID:", id);
-    console.log("Payload:", payload);
     const result = await movieController.updateById(id, payload);
     res.json({ msg: "Movie Updated Successfully", data: result });
   } catch (e) {
@@ -94,21 +77,6 @@ router.put("/:id", secure(["admin"]), async (req, res, next) => {
 });
 
 
-// router.put(
-//   "/:id",
-//   secure(["admin"]),
-//   // upload.single("poster"),
-//   async (req, res, next) => {
-//     try {
-//       const { id } = req.params;
-//       req.body.updatedBy = req.currentUser;
-//       const result = await movieController.update(id, req.body);
-//       res.json({ msg: `Update one movie by ${id}`, data: result });
-//     } catch (e) {
-//       next(e);
-//     }
-//   }
-// );
 
 router.put("/:id", secure(["admin"]), async (req, res, next) => {
   try {
@@ -130,13 +98,13 @@ router.delete("/:slug", secure(["admin"]), async (req, res, next) => {
   }
 });
 
-router.patch("/:slug/seats", secure(["admin"]), async (req, res, next) => {
+router.patch("/:id/seats", secure(["admin"]), async (req, res, next) => {
   try {
-    const { slug } = req.params;
+    const { id } = req.params;
     req.body.updatedBy = req.currentUser;
-    const result = await movieController.updateSeats(slug, req.body);
+    const result = await movieController.updateSeats(id , req.body);
     res.json({
-      msg: `Update the seat number of one movie by ${slug}`,
+      msg: `Update the seat number of one movie by ${id}`,
       data: result,
     });
   } catch (e) {

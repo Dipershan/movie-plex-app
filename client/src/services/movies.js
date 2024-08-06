@@ -22,11 +22,10 @@ const list = (limit, page, title) => {
     return instance.put(`${APIs.MOVIES}/${id}`, payload, {
       headers: {
         access_token: getToken("access_token"),
-      
       },
     });
   };
-
+  
 
  
   const getById = (id) => {

@@ -92,24 +92,31 @@ const updateReleaseDate = (slug, payload) => {
 };
 
 // update Movie Detail (update)
-const updateById = (id, payload) => {
-
-  return movieModel.findOneAndUpdate({ id }, payload);
+const updateById = async (id, payload) => {
+  return movieModel.findOneAndUpdate({ _id: id }, payload, { new: true });
 };
 
 
 
-// const updateById = (id, payload) => {
-//   return movieModel.findOneAndUpdate({ _id: id }, payload, { new: true });
-// };
 // update Seat Number (updateSeats)
-const updateSeats = async (slug, payload) => {
-  const movie = await movieModel.findOne({ slug });
+// const updateSeats = async (slug, payload) => {
+//   const movie = await movieModel.findOne({ slug });
+//   if (payload.seats < Number(process.env.NO_OF_SEATS)) {
+//     throw new Error(`Movie seats cant be less than ${process.env.NO_OF_SEATS}`);
+//   }
+//   return movieModel.findOneAndUpdate({ slug }, payload, { new: true });
+// };
+
+const updateSeats = async (id, payload) => {
+  
+    const movie = await movieModel.findOneAndUpdate({  _id: id  }, payload, { new: true });
   if (payload.seats < Number(process.env.NO_OF_SEATS)) {
     throw new Error(`Movie seats cant be less than ${process.env.NO_OF_SEATS}`);
   }
   return movieModel.findOneAndUpdate({ slug }, payload, { new: true });
 };
+
+
 
 // delete movie (remove)
 const remove = async (slug) => {

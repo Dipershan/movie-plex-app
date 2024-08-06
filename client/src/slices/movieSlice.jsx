@@ -97,7 +97,7 @@ const movieSlice = createSlice({
       })
       .addCase(updateMovie.fulfilled, (state, action) => {
         state.loading = false;
-        const index = state.movies.findIndex(movie => movie._id === action.payload._id);
+        const index = state.movies.findIndex((movie) => movie._id === action.payload._id);
         if (index !== -1) {
           state.movies[index] = action.payload;
         } else {
@@ -125,7 +125,9 @@ const movieSlice = createSlice({
       .addCase(updateSeats.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
-      });
+      })
+   
+      
   },
 });
 

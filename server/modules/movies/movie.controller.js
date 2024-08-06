@@ -98,15 +98,6 @@ const updateById = async (id, payload) => {
 
 
 
-// update Seat Number (updateSeats)
-// const updateSeats = async (slug, payload) => {
-//   const movie = await movieModel.findOne({ slug });
-//   if (payload.seats < Number(process.env.NO_OF_SEATS)) {
-//     throw new Error(`Movie seats cant be less than ${process.env.NO_OF_SEATS}`);
-//   }
-//   return movieModel.findOneAndUpdate({ slug }, payload, { new: true });
-// };
-
 const updateSeats = async (id, payload) => {
   
     const movie = await movieModel.findOneAndUpdate({  _id: id  }, payload, { new: true });
